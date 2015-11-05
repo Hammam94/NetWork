@@ -15,45 +15,35 @@ public class ServerThreads extends Thread {
 	
 	@SuppressWarnings("static-access")
 	public void run(){
-		
-			
-			EventQueue.invokeLater(new Runnable() {
-
-				public void run() {
-					try {
-						String message  = null;
-						PrintWriter printWriter = new PrintWriter(socket.getOutputStream(),true);
-						BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-						String ClientName = bufferedReader.readLine();
-						server.message += ClientName + " is connected\n";
-						server.textArea.setText(server.message);
-						while(( message = bufferedReader.readLine()) != null ){
-							System.out.println(ClientName +" values: " + message);
-							server.message += ClientName +" values: " + message +"\n";
-							server.textArea.setText(server.message);
-							//Splite by spaces
-							ClientNumbers =  Arrays.asList(message.split("\\s+"));
-							//get sum
-							double Sum = Sumtionof(ClientNumbers);
-							//check for errors
-							if(flag_many_dot_in_one_number || flag_not_one_number || error){
-								flag_many_dot_in_one_number = false;
-								flag_not_one_number = false;
-								error = false;
-								printWriter.println(ClientName + " You have errors in your inupts so i cant sum it ");
-							}else{
-								printWriter.println(ClientName + " Your result: " + String.valueOf(Sum));
-							}								
-						}
-						socket.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					
-				}
-			});
-			
-			
+		try {
+			String message  = null;
+			PrintWriter printWriter = new PrintWriter(socket.getOutputStream(),true);
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			String ClientName = bufferedReader.readLine();
+			server.message += ClientName + " is connected\n";
+			server.textArea.setText(server.message);
+			while(!( message = bufferedReader.readLine()).equals("") ){
+				System.out.println(ClientName +" values: " + message);
+				server.message += ClientName +" values: " + message +"\n";
+				server.textArea.setText(server.message);
+				//Splite by spaces
+				ClientNumbers =  Arrays.asList(message.split("\\s+"));
+				//get sum
+				double Sum = Sumtionof(ClientNumbers);
+				//check for errors
+				if(flag_many_dot_in_one_number || flag_not_one_number || error){
+					flag_many_dot_in_one_number = false;
+					flag_not_one_number = false;
+					error = false;
+					printWriter.println(ClientName + " You have errors in your inupts so i cant sum it ");
+				}else{
+					printWriter.println(ClientName + " Your result: " + String.valueOf(Sum));
+				}								
+			}
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	private double Sumtionof(List<String> clientNumber) {
