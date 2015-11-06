@@ -23,8 +23,11 @@ class UDP_Client {
 	public static String message = null , Send_msg = null;
 	private static Button Send;
     private static byte[] sendData = new byte[1024], receiveData = new byte[1024];
+    
+    //main
 	public static void main(String args[]) throws Exception {     
 		String name = args[0];     
+		@SuppressWarnings("resource")
 		DatagramSocket clientSocket = new DatagramSocket();       
 		InetAddress IPAddress = InetAddress.getByName("localhost");   
 		

@@ -15,7 +15,7 @@ public class Client {
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws UnknownHostException, IOException { 
-		String name = "ALI"; //args[0];
+		String name = args[0];
 		Socket socket = new Socket("localhost", Server.TCP_port);
 		//Read form the server
 		BufferedReader Servermessage = new BufferedReader(new InputStreamReader(socket.getInputStream())); 
