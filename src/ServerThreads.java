@@ -35,7 +35,7 @@ public class ServerThreads extends Thread {
 					flag_many_dot_in_one_number = false;
 					flag_not_one_number = false;
 					error = false;
-					printWriter.println(ClientName + " You have errors in your inupts so i cant sum it ");
+					printWriter.println(ClientName + " You have errors in your inupts so i cant sum it");
 				}else{
 					printWriter.println(ClientName + " Your result: " + String.valueOf(Sum));
 				}								

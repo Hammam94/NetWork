@@ -7,8 +7,7 @@ public class GUI extends JFrame {
         
         public GUI(String title) {
     	    super(title);
-            setSize(350, 400);
-            
+            setSize(350, 400);           
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
             setLayout(null);
