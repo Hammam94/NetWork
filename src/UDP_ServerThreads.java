@@ -21,19 +21,9 @@ public class UDP_ServerThreads extends Thread {
 
 	@SuppressWarnings("static-access")
 	public void run(){	
-		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);                   
-		try {
-			serverSocket.receive(receivePacket);
-			sentence = new String( receivePacket.getData(), "UTF8");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}        
-		
-		server.message += sentence.trim() + " is connected\n";
-		server.textArea.setText(server.message);
 		while(true){
 		try{			
-			receivePacket = new DatagramPacket(receiveData, receiveData.length);                   
+			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);                   
 			serverSocket.receive(receivePacket);                 
 			sentence = new String( receivePacket.getData(), "UTF8");
 			server.message += "RECEVIED: " + sentence.trim() + "\n";
