@@ -1,7 +1,10 @@
 import java.awt.EventQueue;
+import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+
+import javax.swing.JOptionPane;
 
 
 public class ServerThreads extends Thread {
@@ -11,10 +14,12 @@ public class ServerThreads extends Thread {
 	boolean flag_not_one_number = false, flag_many_dot_in_one_number = false, error = false;
 	ServerThreads(Socket socket){
 		this.socket = socket;
+		
 	}
 	
 	@SuppressWarnings("static-access")
 	public void run(){
+		
 		try {
 			String message  = null;
 			PrintWriter printWriter = new PrintWriter(socket.getOutputStream(),true);
@@ -23,7 +28,6 @@ public class ServerThreads extends Thread {
 			server.message += ClientName + " is connected\n";
 			server.textArea.setText(server.message);
 			while(!( message = bufferedReader.readLine()).equals("") ){
-				System.out.println(ClientName +" values: " + message);
 				server.message += ClientName +" values: " + message +"\n";
 				server.textArea.setText(server.message);
 				//Splite by spaces

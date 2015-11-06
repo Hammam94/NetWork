@@ -1,6 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 
@@ -15,9 +14,9 @@ public abstract class Server {
 	public static JScrollPane scrollPane;
 	public static String message = null;	
 	private static boolean Runnable = true;
+	public static boolean Connected = true;
 	
-	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException  {
 	    scrollPane = new JScrollPane(textArea);
 		textArea.setEditable(false);
 		textArea.setBackground(Color.WHITE);
@@ -59,6 +58,5 @@ public abstract class Server {
 		
 		Server_GUI.addComponent(scrollPane);
 		Server_GUI.addComponent(Server_Start);
-
     }
 }

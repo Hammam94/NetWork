@@ -7,17 +7,15 @@ import javax.swing.JScrollPane;
 
 
 public class Client {
-	//public static GUI Server_GUI = new GUI("TCP-Server");
 	public static TextArea msgr = new TextArea();
 	public static TextField sender = new TextField();
 	public static JScrollPane scrollPane;
 	public static String message = null , Send_msg = null;
-	private static boolean sender_accept = false;
+	private static Button Send;
 	
-	private static boolean Runnable = true;
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws UnknownHostException, IOException { 
-		String name = args[0];
+		String name = "ALI"; //args[0];
 		Socket socket = new Socket("localhost", Server.TCP_port);
 		//Read form the server
 		BufferedReader Servermessage = new BufferedReader(new InputStreamReader(socket.getInputStream())); 
@@ -41,33 +39,26 @@ public class Client {
 		sender.setSize(300, 20);
 		sender.setVisible(true);
 		
-		Button Send = new Button("Send");
+		Send = new Button("Send");
 		Send.setSize(85,30);
 		Send.setLocation(110,330);
 		Send.setVisible(true);
-		Send.addActionListener(new ActionListener() {	
+		Send.addActionListener(new ActionListener() {				
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(socket.isConnected());
-				if(!socket.isInputShutdown()){
-					String ReaderInput = sender.getText();
-		            printWriter.println(ReaderInput);
-		            try {
-		            	//System.out.println(Servermessage.readLine());
-						message += Servermessage.readLine() + "\n";
-						msgr.setText(message);
-	
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-		            sender.setText("");	 
-				} else {
-					message += "the Server is disconnected.\n";
+			public void actionPerformed(ActionEvent e) {				
+				String ReaderInput = sender.getText();
+			    printWriter.println(ReaderInput);
+			    try {
+			    	String Keep_str = Servermessage.readLine();
+					message += Keep_str + "\n";
 					msgr.setText(message);
+					System.out.println(Keep_str);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-			}
-				
+			    sender.setText("");	 
+			}	
         });
 		
 		
@@ -77,13 +68,5 @@ public class Client {
 		Server_GUI.addComponent(Send);
 		message = "Client is Started.\n";
 		msgr.setText(message);
-		/*while(sender_accept){
-        	String ReaderInput = Send_msg;
-            printWriter.println(ReaderInput);
-            message += Servermessage.readLine();
-            msgr.setText(message);
-            System.out.println(sender_accept);
-            //sender_accept = false;
-        }*/
 	}
 }
